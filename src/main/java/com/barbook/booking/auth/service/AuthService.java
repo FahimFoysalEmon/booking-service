@@ -2,6 +2,7 @@ package com.barbook.booking.auth.service;
 
 import com.barbook.booking.auth.dto.AuthResponse;
 import com.barbook.booking.auth.dto.LoginRequest;
+import com.barbook.booking.common.exception.InvalidDataException;
 import com.barbook.booking.security.JwtService;
 import com.barbook.booking.users.entity.Users;
 import com.barbook.booking.users.enums.UserStatus;
@@ -30,14 +31,12 @@ public class AuthService {
                 ));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "Password does not match"
+            throw new InvalidDataException("Password does not match"
             );
         }
 
         if (user.getStatus() != UserStatus.ACTIVE) {
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "Account is disabled"
+            throw new InvalidDataException("Account is disabled"
             );
         }
 
