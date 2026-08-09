@@ -24,16 +24,14 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
 
-        log.info("login request: {}", request);
-
         Users user = usersRepository.findByEmail(request.email())
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.UNAUTHORIZED, "Invalid email or password"
+                        HttpStatus.UNAUTHORIZED, "Email is not valid"
                 ));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "Invalid email or password"
+                    HttpStatus.UNAUTHORIZED, "Password does not match"
             );
         }
 
@@ -43,8 +41,6 @@ public class AuthService {
             );
         }
 
-        log.info("User logged in: {}", user.getEmail());
-
         String token = jwtService.generateToken(user);
         return new AuthResponse(
                 token,
@@ -53,7 +49,6 @@ public class AuthService {
                 user.getFullName(),
                 user.getRole()
         );
-
     }
 
 }
