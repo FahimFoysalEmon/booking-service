@@ -3,8 +3,7 @@ package com.barbook.booking.users.entity;
 import com.barbook.booking.users.enums.Role;
 import com.barbook.booking.users.enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,8 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
+@Data
 public class Users {
 
     @Id

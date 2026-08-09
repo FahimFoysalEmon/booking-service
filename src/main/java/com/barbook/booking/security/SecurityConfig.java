@@ -1,5 +1,6 @@
 package com.barbook.booking.security;
 
+import com.barbook.booking.auth.utils.AuthEndPointUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,15 +11,23 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                AuthEndPointUtils.LOGIN_FULL,
+                                AuthEndPointUtils.REGISTER_FULL
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                );
         return http.build();
     }
 }
