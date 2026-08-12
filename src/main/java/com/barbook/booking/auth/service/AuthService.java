@@ -2,9 +2,11 @@ package com.barbook.booking.auth.service;
 
 import com.barbook.booking.auth.dto.AuthResponse;
 import com.barbook.booking.auth.dto.LoginRequest;
+import com.barbook.booking.auth.dto.RegisterRequest;
 import com.barbook.booking.common.exception.InvalidDataException;
 import com.barbook.booking.security.JwtService;
 import com.barbook.booking.users.entity.Users;
+import com.barbook.booking.users.enums.Role;
 import com.barbook.booking.users.enums.UserStatus;
 import com.barbook.booking.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +28,8 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
 
         Users user = usersRepository.findByEmail(request.email())
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.UNAUTHORIZED, "Email is not valid"
+                .orElseThrow(() -> new InvalidDataException(
+                        "Email is not valid"
                 ));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
@@ -47,6 +49,52 @@ public class AuthService {
                 user.getEmail(),
                 user.getFullName(),
                 user.getRole()
+        );
+    }
+
+
+
+    public AuthResponse register(RegisterRequest request) {
+
+        Role role = request.role() == null ? Role.CUSTOMER : request.role();
+
+        if (role == Role.ADMIN) {
+            throw new InvalidDataException("Cannot register as ADMIN");
+        }
+
+        if (role != Role.CUSTOMER && role != Role.SHOP_OWNER) {
+            throw new InvalidDataException("Invalid role");
+        }
+
+        if (usersRepository.existsByEmail(request.email())) {
+            throw new InvalidDataException("Email already exists");
+        }
+
+        if (usersRepository.existsByPhone(request.phone())) {
+            throw new InvalidDataException("Phone already exists");
+        }
+
+        if (!request.password().equals(request.confirmPassword())) {
+            throw new InvalidDataException("Password did not match");
+        }
+
+        Users user = new Users();
+        user.setFullName(request.fullName());
+        user.setEmail(request.email());
+        user.setPhone(request.phone());
+        user.setPassword(passwordEncoder.encode(request.password()));
+        user.setRole(role);
+        user.setStatus(UserStatus.ACTIVE);
+
+        Users saved = usersRepository.save(user);
+        String token = jwtService.generateToken(saved);
+
+        return new AuthResponse(
+                token,
+                saved.getId(),
+                saved.getEmail(),
+                saved.getFullName(),
+                saved.getRole()
         );
     }
 
