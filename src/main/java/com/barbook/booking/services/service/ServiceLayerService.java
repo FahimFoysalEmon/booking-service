@@ -25,8 +25,14 @@ public class ServiceLayerService {
     private final UsersRepository usersRepository;
 
     public ServiceResponse createService(String ownerEmail, CreateServiceRequest request) {
+
         Users owner = getShopOwner(ownerEmail);
         Shops shop = getOwnerShop(owner);
+
+        if (serviceRepository.existsByShopAndNameIgnoreCase(shop, request.name())) {
+            throw new InvalidDataException("Service with this name already exists");
+        }
+
         Services service = new Services();
         service.setName(request.name());
         service.setPrice(request.price());
@@ -34,6 +40,7 @@ public class ServiceLayerService {
         service.setDescription(request.description());
         service.setShop(shop);
         service.setStatus(ServiceStatus.ACTIVE);
+
         return toResponse(serviceRepository.save(service));
     }
     public List<ServiceResponse> getMyServices(String ownerEmail) {
@@ -43,6 +50,7 @@ public class ServiceLayerService {
                 .map(this::toResponse)
                 .toList();
     }
+
     private Users getShopOwner(String email) {
         Users user = usersRepository.findByEmail(email)
                 .orElseThrow(() -> new InvalidDataException("User not found"));
@@ -51,10 +59,12 @@ public class ServiceLayerService {
         }
         return user;
     }
+
     private Shops getOwnerShop(Users owner) {
         return shopRepository.findByOwner(owner)
                 .orElseThrow(() -> new InvalidDataException("Create a shop first"));
     }
+
     private ServiceResponse toResponse(Services service) {
         return new ServiceResponse(
                 service.getId(),
