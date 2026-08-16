@@ -4,6 +4,7 @@ import com.barbook.booking.common.exception.InvalidDataException;
 import com.barbook.booking.services.entity.Services;
 import com.barbook.booking.services.enums.ServiceStatus;
 import com.barbook.booking.services.model.request.CreateServiceRequest;
+import com.barbook.booking.services.model.request.UpdateServiceRequest;
 import com.barbook.booking.services.model.response.ServiceResponse;
 import com.barbook.booking.services.repository.ServiceRepository;
 import com.barbook.booking.shops.entity.Shops;
@@ -76,4 +77,44 @@ public class ServiceLayerService {
                 service.getShop().getId()
         );
     }
+
+
+    public ServiceResponse updateService(String ownerEmail, Long serviceId, UpdateServiceRequest request) {
+        Users owner = getShopOwner(ownerEmail);
+        Shops shop = getOwnerShop(owner);
+        Services service = getOwnedService(shop, serviceId);
+
+        if (serviceRepository.existsByShopAndNameIgnoreCaseAndIdNot(shop, request.name(), serviceId)) {
+            throw new InvalidDataException("Service with this name already exists");
+        }
+
+        service.setName(request.name());
+        service.setPrice(request.price());
+        service.setDurationMinutes(request.durationMinutes());
+        service.setDescription(request.description());
+
+        return toResponse(serviceRepository.save(service));
+    }
+
+    public ServiceResponse disableService(String ownerEmail, Long serviceId) {
+        Users owner = getShopOwner(ownerEmail);
+        Shops shop = getOwnerShop(owner);
+        Services service = getOwnedService(shop, serviceId);
+
+        service.setStatus(ServiceStatus.INACTIVE);
+        return toResponse(serviceRepository.save(service));
+    }
+
+
+    private Services getOwnedService(Shops shop, Long serviceId) {
+        Services service = serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new InvalidDataException("Service not found"));
+
+        if (!service.getShop().getId().equals(shop.getId())) {
+            throw new InvalidDataException("Service does not belong to your shop");
+        }
+        return service;
+    }
+
+
 }

@@ -9,10 +9,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-public interface ServiceRepository extends JpaRepository<Services, Integer> {
+public interface ServiceRepository extends JpaRepository<Services, Long> {
 
     List<Services> findByShop(Shops shop);
 
     boolean existsByShopAndNameIgnoreCase(Shops shop, String name);
+
+    boolean existsByShopAndNameIgnoreCaseAndIdNot(Shops shop, String name, Long id);
 }
 
