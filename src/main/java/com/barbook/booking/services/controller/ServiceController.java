@@ -47,4 +47,5 @@ public class ServiceController {
     ) {
         return serviceLayerService.disableService(authentication.getName(), serviceId);
     }
+
 }

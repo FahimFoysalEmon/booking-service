@@ -12,6 +12,8 @@ import com.barbook.booking.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ShopService {
@@ -63,5 +65,15 @@ public class ShopService {
                 shop.getStatus(),
                 shop.getOwner().getId()
         );
+    }
+
+
+
+    // CUSTOMER
+
+    public List<ShopResponse> listActiveShops() {
+        return shopRepository.findByStatus(ShopStatus.ACTIVE).stream()
+                .map(this::toResponse)
+                .toList();
     }
 }

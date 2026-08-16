@@ -1,13 +1,16 @@
 package com.barbook.booking.services.service;
 
+import com.barbook.booking.availability.entity.Availability;
 import com.barbook.booking.common.exception.InvalidDataException;
 import com.barbook.booking.services.entity.Services;
 import com.barbook.booking.services.enums.ServiceStatus;
 import com.barbook.booking.services.model.request.CreateServiceRequest;
 import com.barbook.booking.services.model.request.UpdateServiceRequest;
+import com.barbook.booking.slot.model.response.AvailableSlotsResponse;
 import com.barbook.booking.services.model.response.ServiceResponse;
 import com.barbook.booking.services.repository.ServiceRepository;
 import com.barbook.booking.shops.entity.Shops;
+import com.barbook.booking.shops.enums.ShopStatus;
 import com.barbook.booking.shops.repository.ShopRepository;
 import com.barbook.booking.users.entity.Users;
 import com.barbook.booking.users.enums.Role;
@@ -15,6 +18,8 @@ import com.barbook.booking.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -115,6 +120,9 @@ public class ServiceLayerService {
         }
         return service;
     }
+
+
+
 
 
 }

@@ -36,7 +36,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 AuthEndPointUtils.LOGIN_FULL,
                                 AuthEndPointUtils.REGISTER_FULL,
-                                "/error"
+                                "/error",
+                                "/api/v1/public/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
