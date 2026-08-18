@@ -68,6 +68,7 @@ public class SlotService {
         List<Availability> windows = availabilityRepository
                 .findByShopAndStatus(shop, AvailabilityStatus.OPEN);
 
+        LocalDateTime now = LocalDateTime.now();
         List<SlotItemResponse> slots = new ArrayList<>();
 
         for (Availability window : windows) {
@@ -82,7 +83,7 @@ public class SlotService {
                         slotEnd
                 );
 
-                if (!isBooked) {
+                if (!isBooked && cursor.isAfter(now)) {
                     slots.add(new SlotItemResponse(cursor, slotEnd));
                 }
 
