@@ -20,11 +20,13 @@ public class SlotBookingController {
 
     private final SlotService slotService;
 
+    //FOR CUSTOMER
     @GetMapping(SlotEndPointUtils.PUBLIC_SERVICES_BY_SHOP)
     public List<ServiceResponse> listServicesByShop(@PathVariable Long shopId) {
         return slotService.listActiveServicesByShop(shopId);
     }
 
+    //FOR CUSTOMER
     @GetMapping(SlotEndPointUtils.PUBLIC_SLOTS)
     public AvailableSlotsResponse getSlots(
             @PathVariable Long shopId,
