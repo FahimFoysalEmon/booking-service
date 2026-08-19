@@ -9,9 +9,11 @@ export default function App() {
   return (
     <Routes>
       <Route element={<MainLayout />} >
+
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        
       </Route>
 
 
