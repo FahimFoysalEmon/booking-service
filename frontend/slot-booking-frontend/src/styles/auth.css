@@ -54,6 +54,33 @@
   }
 }
 
+
+.auth-password-wrap {
+  position: relative;
+}
+
+.auth-password-wrap input {
+  width: 100%;
+  padding-right: 64px; /* space so text doesn't sit under the button */
+  box-sizing: border-box;
+}
+
+.auth-eye {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  color: #2f6f5e;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .auth-card {
   width: 100%;
   max-width: 420px;

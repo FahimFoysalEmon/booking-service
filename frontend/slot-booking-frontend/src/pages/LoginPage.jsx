@@ -54,14 +54,20 @@ export default function LoginPage() {
               </div>
               <div className="auth-field">
                 <label>Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button className="auth-submit" type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                >Login</button>
+                <div className="auth-password-wrap">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button className="auth-eye" type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+
+                </div>
+
               </div>
               <button className="auth-submit" type="submit">Login</button>
             </form>
