@@ -32,43 +32,75 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
-        <h1 className="auth-brand">BarBook</h1>
-        <p className="auth-subtitle">Sign in to book your next visit!</p>
 
 
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="auth-field">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+      <div className="auth-shell">
+
+        {/* LEFT */}
+        <div className="auth-left">
+          <div className="auth-card">
+            <h1 className="auth-brand">BarBook</h1>
+            <p className="auth-subtitle">Sign in to book your next visit!</p>
+
+
+            <form className="auth-form" onSubmit={handleSubmit}>
+              <div className="auth-field">
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="auth-field">
+                <label>Password</label>
+                <div className="auth-password-wrap">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button className="auth-eye" type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+
+                </div>
+
+              </div>
+              <button className="auth-submit" type="submit">Login</button>
+            </form>
+
+
+
+
+            {/* Footer Section */}
+            <p className="auth-footer">
+              New here? <Link to="/register">Create account</Link>
+            </p>
+
+
           </div>
-          <div className="auth-field">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button className="auth-submit" type="submit"
-            onClick={() => setShowPassword(!showPassword)}
-          >Login</button>
-        </form>
+        </div>
 
 
 
+        {/* RIGHT */}
+        <div className="auth-right">
+          <h1>What you can do here!</h1>
+          <p>Book a shop visit in a few clicks.</p>
+          <p>1. Choose a shop</p>
+          <p>2. Pick a service and time</p>
+          <p>3. Confirm your booking</p>
+        </div>
 
-        {/* Footer Section */}
-        <p className="auth-footer">
-          New here? <Link to="/register">Create account</Link>
-        </p>
 
 
       </div>
+
+
+
     </div>
   )
 }
