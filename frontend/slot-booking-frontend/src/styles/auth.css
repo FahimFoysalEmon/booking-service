@@ -36,6 +36,20 @@
   color: #ffffff;
 }
 
+.auth-right h1 {
+  margin: 20 20 12px;
+  font-size: 50px;
+}
+
+.auth-right p {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #d5e8e1;
+  /* font-style: italic; */
+  font-weight: 700;
+  font-synthesis: style weight; /* allow slant + bold */
+}
+
 .auth-hero-image {
   width: 100%;
   max-width: 420px;
@@ -51,6 +65,8 @@
 
   .auth-right {
     display: none; /* or show below form */
+    text-align: center;
+    
   }
 }
 

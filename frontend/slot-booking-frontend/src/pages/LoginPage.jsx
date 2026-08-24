@@ -88,13 +88,11 @@ export default function LoginPage() {
 
         {/* RIGHT */}
         <div className="auth-right">
-          <h2>Welcome to BarBook</h2>
-          <p>Book barbers, salons, and services with real-time slots.</p>
-          <ul>
-            <li>Browse nearby shops</li>
-            <li>Pick service & time</li>
-            <li>Manage your bookings</li>
-          </ul>
+          <h1>What you can do here!</h1>
+          <p>Book a shop visit in a few clicks.</p>
+          <p>1. Choose a shop</p>
+          <p>2. Pick a service and time</p>
+          <p>3. Confirm your booking</p>
         </div>
 
 
