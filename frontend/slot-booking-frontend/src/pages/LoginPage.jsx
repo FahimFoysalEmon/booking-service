@@ -25,14 +25,20 @@ export default function LoginPage() {
       navigate("/");
       console.log("Login Succesful");
 
-    } catch (error) {
-      setError(error.response?.data?.message || "Login failed");
-    }
+   } catch (error) {
+  const message = error.response?.data?.message || "Login failed";
+  setError(message);
+
+  setTimeout(() => {
+    setError("");
+  }, 3000);
+}
   }
 
   return (
     <div className="auth-page">
 
+{error && <div className="auth-toast">{error}</div>}
 
       <div className="auth-shell">
 
