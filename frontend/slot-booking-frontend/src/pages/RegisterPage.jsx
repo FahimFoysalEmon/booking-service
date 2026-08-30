@@ -24,7 +24,7 @@ export default function RegisterPage() {
       return;
     }
     try {
-      await api.post("api/v1/auth/register", {
+      await api.post("/api/v1/auth/register", {
         fullName,
         email,
         phone,
@@ -101,7 +101,7 @@ export default function RegisterPage() {
           <label>Role</label>
           <select value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="CUSTOMER">Customer</option>
-            <option value="ADMIN">Admin</option>
+            <option value="SHOP_OWNER">Shop Owner</option>
           </select>
         </div>
         <button type="submit">Register</button>

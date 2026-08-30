@@ -17,7 +17,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     try {
-      const response = await api.post("api/v1/auth/login", {
+      const response = await api.post("/api/v1/auth/login", {
         email,
         password,
       });
@@ -25,20 +25,20 @@ export default function LoginPage() {
       navigate("/");
       console.log("Login Succesful");
 
-   } catch (error) {
-  const message = error.response?.data?.message || "Login failed";
-  setError(message);
+    } catch (error) {
+      const message = error.response?.data?.message || "Login failed";
+      setError(message);
 
-  setTimeout(() => {
-    setError("");
-  }, 3000);
-}
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
   }
 
   return (
     <div className="auth-page">
 
-{error && <div className="auth-toast">{error}</div>}
+      {error && <div className="auth-toast">{error}</div>}
 
       <div className="auth-shell">
 
