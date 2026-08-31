@@ -7,6 +7,7 @@ export default function MainLayout() {
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
+        <Link to="/shops">Shops</Link>
       </nav>
       <Outlet />
     </div>
