@@ -2,7 +2,7 @@ import { useState } from "react"; //to remember the state of the form
 import { Link, useNavigate } from "react-router-dom"; //to navigate to the home page
 import api from "../lib/api";
 import { saveToken } from "../lib/token"; //to save the token to the local storage
-import { Container, Row, Col, Form, Button, Alert, InputGroup } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert, InputGroup, Card } from "react-bootstrap";
 
 export default function LoginPage() {
 
@@ -46,43 +46,50 @@ export default function LoginPage() {
 
             {error && <Alert variant="danger">{error}</Alert>}
 
-            <Form onSubmit={handleSubmit}>
+            <Card className="border-0 shadow p-4">
 
-            <Form.Group className="mb-3" controlId="loginEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="Enter email"
-              />
-            </Form.Group>
+              <Form onSubmit={handleSubmit}>
 
-            <Form.Group className="mb-3" controlId="loginPassword">
-              <Form.Label>Password</Form.Label>
-              <InputGroup>
-                <Form.Control
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Enter password"
-                />
-                <Button
-                  variant="outline-secondary"
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? "Hide" : "Show"}
+                <Form.Group className="mb-3" controlId="loginEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Enter email"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="loginPassword">
+                  <Form.Label>Password</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      placeholder="Enter password"
+                    />
+                    <Button
+                      variant="outline-secondary"
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </Button>
+                  </InputGroup>
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className="bg-success w-100">
+                  Login
                 </Button>
-              </InputGroup>
-            </Form.Group>
+              </Form>
 
-            <Button variant="primary" type="submit" className="bg-success w-100">
-              Login
-            </Button>
-            </Form>
+            </Card>
+
+
+
             <p className="mt-3 mb-0">
               New here? <Link to="/register">Create account</Link>
             </p>
