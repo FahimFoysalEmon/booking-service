@@ -38,11 +38,11 @@ export default function LoginPage() {
 
 
   return (
-    <Container fluid className="min-vh-100">
+    <Container fluid className="min-vh-100" style={{background: "#78d9bc"}}>
       <Row className="min-vh-100">
 
         {/* LEFT */}
-        <Col md={6} className="d-flex align-items-center justify-content-center p-4">
+        <Col md={12} className="d-flex align-items-center justify-content-center p-4">
           <div style={{ width: "100%", maxWidth: "420px" }}>
             <h1 className="mb-1">BarBook</h1>
             <p className="text-muted mb-4">Sign in to book your next visit!</p>
@@ -54,24 +54,40 @@ export default function LoginPage() {
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-bold">Email</Form.Label>
                   <Form.Control
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Type your email here">
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Type your email here">
                   </Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-bold">Password</Form.Label>
-                  <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Type your password here">
-                  </Form.Control>
+                  <InputGroup>
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Type your password here">
+                    </Form.Control>
+                    <Button
+                      variant="outline-secondary"
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </Button>
+                  </InputGroup>
                 </Form.Group>
+
+                <Button type="submit" className="bg-success w-100">
+                  Login
+                </Button>
+
               </Form>
             </Card>
+            <p className="mt-3 mb-0">New here? <Link to="/register">Create account</Link></p>
+
           </div>
         </Col>
       </Row>

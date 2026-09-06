@@ -58,7 +58,7 @@ export default function RegisterPage() {
 
 
           <Card className="border-0 shadow p-4">
-          <form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Full Name</Form.Label>
               <Form.Control
@@ -125,7 +125,7 @@ export default function RegisterPage() {
               </Form.Select>
             </Form.Group>
             <Button className="bg-success" type="submit">Register</Button>
-          </form>
+          </Form>
           </Card>
 
           <Toast autohide delay={3000} show={!!error} bg="danger" className="position-fixed top-0 end-0 m-3 text-white" onClose={() => setError("")}>
