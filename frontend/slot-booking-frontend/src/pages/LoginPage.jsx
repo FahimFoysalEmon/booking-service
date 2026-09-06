@@ -51,6 +51,25 @@ export default function LoginPage() {
 
             <Card className="border-0 shadow p-4">
               <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Label className="fw-bold">Email</Form.Label>
+                  <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Type your email here">
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label className="fw-bold">Password</Form.Label>
+                  <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Type your password here">
+                  </Form.Control>
+                </Form.Group>
               </Form>
             </Card>
           </div>
