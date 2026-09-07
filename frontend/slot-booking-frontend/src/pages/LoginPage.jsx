@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; //to navigate to the home 
 import api from "../lib/api";
 import { saveToken } from "../lib/token"; //to save the token to the local storage
 import { Container, Row, Col, Form, Button, Alert, InputGroup, Card } from "react-bootstrap";
+import loginBy from "../assets/barbook-login-bg.png";
 
 export default function LoginPage() {
 
@@ -38,105 +39,68 @@ export default function LoginPage() {
 
 
   return (
-    <Container fluid className="min-vh-100">
+    <Container fluid className="min-vh-100" style={{ backgroundImage: `url(${loginBy})`, backgroundSize: "cover", backgroundPosition: "center" }}>
       <Row className="min-vh-100">
 
-        {/* LEFT */}
-        <col md={6} className="d-flex align-items-center justify-content-center p-4">
-          <div style={{ width: "100%", maxWidth: "420px" }}>
-            <h1 className="mb-1">BarBook</h1>
-            <p className="text-muted mb-4">Sign in to book your next visit!</p>
+      
+          {/* LEFT */}
+          <Col md={6}>
+          </Col>
 
-            {error && <Alert variant="danger">{error}</Alert>}
+          {/* RIGHT */}
+          <Col md={6} className="d-flex align-items-center p-4 justify-content-center">
+            <div style={{ width: "100%", maxWidth: "420px" }}>
 
-            <Card className="border-0 shadow p-4">
-              <Form onSubmit={handleSubmit}>
-              </Form>
-            </Card>
-          </div>
-        </col>
+
+              {error && <Alert variant="danger">{error}</Alert>}
+
+              <Card className="border-0 shadow p-4">
+                <h1 className="mb-1">BarBook</h1>
+                <p className="text-muted mb-4">Sign in to book your next visit!</p>
+
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3">
+                    <Form.Label className="fw-bold">Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Type your email here">
+                    </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label className="fw-bold">Password</Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Type your password here">
+                      </Form.Control>
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? "Hide" : "Show"}
+                      </Button>
+                    </InputGroup>
+                  </Form.Group>
+
+                  <Button type="submit" className="bg-success w-100">
+                    Login
+                  </Button>
+
+                </Form>
+                <p className="mt-3 mb-0">New here? <Link to="/register">Create account</Link></p>
+
+              </Card>
+
+            </div>
+          </Col>
+
       </Row>
     </Container>
   )
-
-  // return (
-  //   <Container fluid className="min-vh-100">
-  //     <Row className="min-vh-100">
-
-  //       <Col md={6} className="d-flex align-items-center justify-content-center p-4">
-  //         <div style={{ width: "100%", maxWidth: "420px" }}>
-  //           <h1 className="mb-1">BarBook</h1>
-  //           <p className="text-muted mb-4">Sign in to book your next visit!</p>
-
-  //           {error && <Alert variant="danger">{error}</Alert>}
-
-  //           <Card className="border-0 shadow p-4">
-
-  //             <Form onSubmit={handleSubmit}>
-
-  //               <Form.Group className="mb-3" controlId="loginEmail">
-  //                 <Form.Label>Email</Form.Label>
-  //                 <Form.Control
-  //                   type="email"
-  //                   value={email}
-  //                   onChange={(e) => setEmail(e.target.value)}
-  //                   required
-  //                   placeholder="Enter email"
-  //                 />
-  //               </Form.Group>
-
-  //               <Form.Group className="mb-3" controlId="loginPassword">
-  //                 <Form.Label>Password</Form.Label>
-  //                 <InputGroup>
-  //                   <Form.Control
-  //                     type={showPassword ? "text" : "password"}
-  //                     value={password}
-  //                     onChange={(e) => setPassword(e.target.value)}
-  //                     required
-  //                     placeholder="Enter password"
-  //                   />
-  //                   <Button
-  //                     variant="outline-secondary"
-  //                     type="button"
-  //                     onClick={() => setShowPassword(!showPassword)}
-  //                   >
-  //                     {showPassword ? "Hide" : "Show"}
-  //                   </Button>
-  //                 </InputGroup>
-  //               </Form.Group>
-
-  //               <Button variant="primary" type="submit" className="bg-success w-100">
-  //                 Login
-  //               </Button>
-  //             </Form>
-
-  //           </Card>
-
-
-
-  //           <p className="mt-3 mb-0">
-  //             New here? <Link to="/register">Create account</Link>
-  //           </p>
-  //         </div>
-  //       </Col>
-
-  //       <Col md={6} className="bg-success text-white d-flex align-items-center p-5">
-  //         <div>
-  //           <h1 className="text-white mb-4">What you can do here!</h1>
-  //           <p>Book a shop visit in a few clicks.</p>
-  //           <p>1. Choose a shop</p>
-  //           <p>2. Pick a service and time</p>
-  //           <p>3. Confirm your booking</p>
-  //         </div>
-  //       </Col>
-  //     </Row>
-
-
-
-
-  //   </Container>
-  // )
-
-
-  
 }
