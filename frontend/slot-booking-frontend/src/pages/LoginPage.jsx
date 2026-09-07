@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; //to navigate to the home 
 import api from "../lib/api";
 import { saveToken } from "../lib/token"; //to save the token to the local storage
 import { Container, Row, Col, Form, Button, Alert, InputGroup, Card } from "react-bootstrap";
+import loginBy from "../assets/barbook-login-bg.png";
 
 export default function LoginPage() {
 
@@ -38,7 +39,7 @@ export default function LoginPage() {
 
 
   return (
-    <Container fluid className="min-vh-100" style={{background: "#78d9bc"}}>
+    <Container fluid className="min-vh-100" style={{background: "#f4f7f5"}}>
       <Row className="min-vh-100">
 
         {/* LEFT */}
