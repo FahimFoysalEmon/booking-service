@@ -39,58 +39,67 @@ export default function LoginPage() {
 
 
   return (
-    <Container fluid className="min-vh-100" style={{background: "#f4f7f5"}}>
+    <Container fluid className="min-vh-100" style={{ backgroundImage: `url(${loginBy})`, backgroundSize: "cover", backgroundPosition: "center" }}>
       <Row className="min-vh-100">
 
-        {/* LEFT */}
-        <Col md={12} className="d-flex align-items-center justify-content-center p-4">
-          <div style={{ width: "100%", maxWidth: "420px" }}>
-            <h1 className="mb-1">BarBook</h1>
-            <p className="text-muted mb-4">Sign in to book your next visit!</p>
+      
+          {/* LEFT */}
+          <Col md={6}>
+          </Col>
 
-            {error && <Alert variant="danger">{error}</Alert>}
+          {/* RIGHT */}
+          <Col md={6} className="d-flex align-items-center p-4 justify-content-center">
+            <div style={{ width: "100%", maxWidth: "420px" }}>
 
-            <Card className="border-0 shadow p-4">
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Type your email here">
-                  </Form.Control>
-                </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">Password</Form.Label>
-                  <InputGroup>
+              {error && <Alert variant="danger">{error}</Alert>}
+
+              <Card className="border-0 shadow p-4">
+                <h1 className="mb-1">BarBook</h1>
+                <p className="text-muted mb-4">Sign in to book your next visit!</p>
+
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3">
+                    <Form.Label className="fw-bold">Email</Form.Label>
                     <Form.Control
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Type your password here">
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Type your email here">
                     </Form.Control>
-                    <Button
-                      variant="outline-secondary"
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? "Hide" : "Show"}
-                    </Button>
-                  </InputGroup>
-                </Form.Group>
+                  </Form.Group>
 
-                <Button type="submit" className="bg-success w-100">
-                  Login
-                </Button>
+                  <Form.Group className="mb-3">
+                    <Form.Label className="fw-bold">Password</Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Type your password here">
+                      </Form.Control>
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? "Hide" : "Show"}
+                      </Button>
+                    </InputGroup>
+                  </Form.Group>
 
-              </Form>
-            </Card>
-            <p className="mt-3 mb-0">New here? <Link to="/register">Create account</Link></p>
+                  <Button type="submit" className="bg-success w-100">
+                    Login
+                  </Button>
 
-          </div>
-        </Col>
+                </Form>
+                <p className="mt-3 mb-0">New here? <Link to="/register">Create account</Link></p>
+
+              </Card>
+
+            </div>
+          </Col>
+
       </Row>
     </Container>
   )
