@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card, Spinner, Alert, Container } from "react-bootstrap";
+import { Card, Spinner, Alert, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import api from "../lib/api";
 
 export default function ShopsPage() {
@@ -43,6 +44,9 @@ export default function ShopsPage() {
                     <Card.Body>
                         <Card.Title>{shop.name}</Card.Title>
                         <Card.Text>{shop.address}</Card.Text>
+                        <Button as={Link} to={`/shops/${shop.id}/services`} variant="success">
+                            View services
+                        </Button>
                     </Card.Body>
                 </Card>
             ))}

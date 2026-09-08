@@ -142,7 +142,7 @@ export default function RegisterPage() {
 
         {/* SECOND COLUMN */}
 
-        <Col md={6} className="d-flex bg-success text-white align-items-start p-5 justify-content-center" style={{ backgroundImage: `url(${loginBy})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        <Col md={6} className="d-flex text-white align-items-start p-5 justify-content-center" style={{ backgroundImage: `url(${loginBy})`, backgroundSize: "cover", backgroundPosition: "center" }}>
           <h1 className="mt-5">Join BarBook!</h1>
 
         </Col>
