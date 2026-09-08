@@ -1,5 +1,5 @@
 import { useState } from "react"; //to remember the state of the form
-import { useNavigate } from "react-router-dom"; //to navigate to the home page
+import { Link, useNavigate } from "react-router-dom"; //to navigate to the home page
 import api from "../lib/api";
 import { saveToken } from "../lib/token"; //to save the token to the local storage
 import { Container, Row, Col, Card, Button, Form, Alert, Spinner, InputGroup, FormControl, FormLabel, Toast } from "react-bootstrap";
@@ -126,6 +126,11 @@ export default function RegisterPage() {
                 </Form.Group>
                 <Button className="bg-success" type="submit">Register</Button>
               </Form>
+
+              <p className="mt-3 mb-0">
+                Already have an account? <Link to="/login">Login</Link>
+              </p>
+
             </Card>
 
             <Toast autohide delay={3000} show={!!error} bg="danger" className="position-fixed top-0 end-0 m-3 text-white" onClose={() => setError("")}>
