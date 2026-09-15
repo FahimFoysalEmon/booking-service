@@ -5,6 +5,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ShopsPage from "./pages/ShopsPage";
+import ShopServicesPage from "./pages/ShopServicesPage";
+
 
 export default function App() {
   return (
@@ -17,6 +19,7 @@ export default function App() {
       <Route element={<MainLayout />} >
         <Route path="/" element={<HomePage />} />
         <Route path="/shops" element={<ShopsPage />} />
+        <Route path="/shops/:shopId/services" element={<ShopServicesPage />} />
       </Route>
 
 
