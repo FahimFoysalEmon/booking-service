@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Container, Alert, Spinner, Card } from "react-bootstrap";
+import { Container, Alert, Spinner, Card, Button } from "react-bootstrap";
 import api from "../lib/api";
 
 
@@ -46,8 +46,15 @@ export default function ShopServicesPage() {
                     <Card.Body>
                         <Card.Title>{service.name}</Card.Title>
                         <Card.Text>
-                            Price: {service.price} - {service.durationMinutes} minutes 
+                            Price: {service.price} - {service.durationMinutes} minutes
                         </Card.Text>
+                        <Button
+                            as={Link}
+                            to={`/shops/${shopId}/services/${service.id}/slots`}
+                            variant="success"
+                        >
+                            View slots
+                        </Button>
                     </Card.Body>
                 </Card>
 
