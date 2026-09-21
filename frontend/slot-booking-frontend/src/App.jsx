@@ -6,6 +6,7 @@ import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ShopsPage from "./pages/ShopsPage";
 import ShopServicesPage from "./pages/ShopServicesPage";
+import ServiceSlotsPage from "./pages/ServiceSlotsPage";
 
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/shops" element={<ShopsPage />} />
         <Route path="/shops/:shopId/services" element={<ShopServicesPage />} />
+        <Route path="/shops/:shopId/services/:serviceId/slots" element={<ServiceSlotsPage />} />
       </Route>
 
 
