@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../lib/api";
-import { Container, Alert, Card, Spinner } from "react-bootstrap";
+import { Container, Alert, Card, Spinner, Button } from "react-bootstrap";
 
 
 
@@ -31,6 +31,20 @@ export default function ServiceSlotsPage() {
         return <Spinner animation="border" className="m-4" />;
     }
 
+    async function bookSlot(startTime) {
+        setError("");
+        try {
+          await api.post("/api/v1/private/booking/create", {
+            shopId: Number(shopId),
+            serviceId: Number(serviceId),
+            startTime,
+          });
+          await loadSlots();
+        } catch (err) {
+          setError(err.response?.data?.message || "Booking failed");
+        }
+      }
+
     return (
         <Container className="py-4">
             <h1>Slots</h1>
@@ -47,6 +61,7 @@ export default function ServiceSlotsPage() {
                         <Card.Text>
                             {slot.startTime} — {slot.endTime}
                         </Card.Text>
+                        <Button variant="success" onClick={() => bookSlot(slot.startTime)}>Book</Button>
                     </Card.Body>
                 </Card>
             ))}
