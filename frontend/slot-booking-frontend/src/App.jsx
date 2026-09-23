@@ -7,6 +7,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ShopsPage from "./pages/ShopsPage";
 import ShopServicesPage from "./pages/ShopServicesPage";
 import ServiceSlotsPage from "./pages/ServiceSlotsPage";
+import MyBookingsPage from "./pages/MyBookingsPage";
+
 
 
 export default function App() {
