@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../lib/api";
-import { Spinner } from "react-bootstrap";
+import { Container, Alert, Card, Spinner } from "react-bootstrap";
 
 export default function MyBookingsPage() {
 
@@ -25,7 +25,31 @@ export default function MyBookingsPage() {
   }, []);
 
   if (loading) {
-    return <h1>My Bookings</h1>;
+    return <Spinner animation="border" className="m-4" />;
   }
+
+  return (
+    <Container className="py-4">
+      <h1>My Bookings</h1>
+
+      {error && <Alert variant="danger">{error}</Alert>}
+
+      {bookings.length === 0 && !error && (
+        <Alert variant="info">No bookings found</Alert>
+      )}
+
+      {bookings.map((booking) => (
+        <Card key={booking.id} className="mb-3">
+          <Card.Body>
+            <Card.Title>{booking.serviceName}</Card.Title>
+            <Card.Text>
+              {booking.startTime} — {booking.endTime}
+            </Card.Text>
+            <Card.Text>Status: {booking.status}</Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
+    </Container>
+  );
 
 }
