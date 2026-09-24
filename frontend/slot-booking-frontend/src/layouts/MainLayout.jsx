@@ -17,6 +17,8 @@ export default function MainLayout() {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
         <Navbar.Brand as={Link} to="/">BarBook</Navbar.Brand>
+        <Navbar.Toggle aria-controls="main-nav" />
+        <Navbar.Collapse id="main-nav">
           <Nav>
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             {!loggedIn && (
@@ -35,6 +37,7 @@ export default function MainLayout() {
               </>
             )}
           </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
       <Outlet />
