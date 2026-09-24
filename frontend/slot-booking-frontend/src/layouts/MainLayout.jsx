@@ -16,6 +16,7 @@ export default function MainLayout() {
     <div>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
+        <Navbar.Brand as={Link} to="/">BarBook</Navbar.Brand>
           <Nav>
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             {!loggedIn && (
