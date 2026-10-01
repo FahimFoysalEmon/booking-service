@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../lib/api";
 import { Container, Alert, Card, Spinner, Button } from "react-bootstrap";
+import { getToken } from "../lib/token";
 
 
 
@@ -11,6 +12,7 @@ export default function ServiceSlotsPage() {
     const [slots, setSlots] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     async function loadSlots() {
         try {
@@ -32,18 +34,22 @@ export default function ServiceSlotsPage() {
     }
 
     async function bookSlot(startTime) {
+        if (!getToken()) {
+            navigate("/login");
+            return;
+        }
         setError("");
         try {
-          await api.post("/api/v1/private/booking/create", {
-            shopId: Number(shopId),
-            serviceId: Number(serviceId),
-            startTime,
-          });
-          await loadSlots();
+            await api.post("/api/v1/private/booking/create", {
+                shopId: Number(shopId),
+                serviceId: Number(serviceId),
+                startTime,
+            });
+            await loadSlots();
         } catch (err) {
-          setError(err.response?.data?.message || "Booking failed");
+            setError(err.response?.data?.message || "Booking failed");
         }
-      }
+    }
 
     return (
         <Container className="py-4">
