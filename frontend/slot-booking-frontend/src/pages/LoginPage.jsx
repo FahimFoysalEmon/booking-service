@@ -1,5 +1,5 @@
 import { useState } from "react"; //to remember the state of the form
-import { Link, useNavigate } from "react-router-dom"; //to navigate to the home page
+import { Link, useNavigate, useLocation } from "react-router-dom"; //to navigate to the home page
 import api from "../lib/api";
 import { saveToken } from "../lib/token"; //to save the token to the local storage
 import { Container, Row, Col, Form, Button, Alert, InputGroup, Card } from "react-bootstrap";
@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const location = useLocation();
 
 
   async function handleSubmit(e) {
@@ -23,7 +24,7 @@ export default function LoginPage() {
         password,
       });
       saveToken(response.data.accessToken);
-      navigate("/");
+      navigate(location.state?.from || "/");
       console.log("Login Succesful");
 
     } catch (error) {
