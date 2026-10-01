@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../lib/api";
 import { Container, Alert, Card, Spinner, Button } from "react-bootstrap";
@@ -13,6 +13,7 @@ export default function ServiceSlotsPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
 
     async function loadSlots() {
         try {
@@ -35,7 +36,7 @@ export default function ServiceSlotsPage() {
 
     async function bookSlot(startTime) {
         if (!getToken()) {
-            navigate("/login");
+            navigate("/login", { state: { from: location.pathname } });
             return;
         }
         setError("");
