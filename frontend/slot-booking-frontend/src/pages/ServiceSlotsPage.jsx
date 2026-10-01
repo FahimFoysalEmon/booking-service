@@ -15,6 +15,10 @@ export default function ServiceSlotsPage() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    function formatTime(value) {
+        return new Date(value).toLocaleString(undefined, { hour12: true });
+    }
+
     async function loadSlots() {
         try {
             const response = await api.get(`/api/v1/public/shops/${shopId}/services/${serviceId}/slots`);
@@ -66,7 +70,7 @@ export default function ServiceSlotsPage() {
                 <Card key={slot.startTime} className="mb-3">
                     <Card.Body>
                         <Card.Text>
-                            {slot.startTime} — {slot.endTime}
+                            {formatTime(slot.startTime)} — {formatTime(slot.endTime)}
                         </Card.Text>
                         <Button variant="success" onClick={() => bookSlot(slot.startTime)}>Book</Button>
                     </Card.Body>
