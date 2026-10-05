@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../lib/api";
 import { Container, Alert, Card, Spinner, Button } from "react-bootstrap";
@@ -11,6 +11,7 @@ export default function ServiceSlotsPage() {
     const { shopId, serviceId } = useParams();
     const [slots, setSlots] = useState([]);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,9 +23,11 @@ export default function ServiceSlotsPage() {
     async function loadSlots() {
         try {
             const response = await api.get(`/api/v1/public/shops/${shopId}/services/${serviceId}/slots`);
+            setSuccess("Booked");
             setSlots(response.data.slots)
         } catch {
             setError("Failed to load slots")
+            setSuccess("")
         } finally {
             setLoading(false)
         }
@@ -44,6 +47,7 @@ export default function ServiceSlotsPage() {
             return;
         }
         setError("");
+        setSuccess("");
         try {
             await api.post("/api/v1/private/booking/create", {
                 shopId: Number(shopId),
@@ -51,7 +55,9 @@ export default function ServiceSlotsPage() {
                 startTime,
             });
             await loadSlots();
+            setSuccess("Booked");
         } catch (err) {
+            setSuccess("");
             setError(err.response?.data?.message || "Booking failed");
         }
     }
@@ -62,7 +68,16 @@ export default function ServiceSlotsPage() {
 
             {error && <Alert variant="danger">{error}</Alert>}
 
-            {slots.length === 0 && !error && (
+            {success && (
+                <Alert variant="success">
+                    {success}{" "}
+                    <Alert.Link as={Link} to="/my-bookings">
+                        View my bookings
+                    </Alert.Link>
+                </Alert>
+            )}
+            
+            {slots.length === 0 && !error && !success && (
                 <Alert variant="info">No slots found</Alert>
             )}
 
