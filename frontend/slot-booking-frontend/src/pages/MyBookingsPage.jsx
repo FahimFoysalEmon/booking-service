@@ -9,6 +9,10 @@ export default function MyBookingsPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+  function formatTime(value) {
+    return new Date(value).toLocaleString(undefined, { hour12: true });
+  }
+
   async function loadBookings() {
     try {
       const response = await api.get("/api/v1/private/booking/me");
@@ -43,7 +47,7 @@ export default function MyBookingsPage() {
           <Card.Body>
             <Card.Title>{booking.serviceName}</Card.Title>
             <Card.Text>
-              {booking.startTime} — {booking.endTime}
+              {formatTime(booking.startTime)} — {formatTime(booking.endTime)}
             </Card.Text>
             <Card.Text>Status: {booking.status}</Card.Text>
           </Card.Body>
